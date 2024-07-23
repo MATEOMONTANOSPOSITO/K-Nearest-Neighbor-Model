@@ -2,7 +2,7 @@ from math import sqrt
 from collections import Counter
 import matplotlib.pyplot as plt
 from GENERICKNN import KNN
-# %%
+
 coordenadasA = [[2, 4], [3, 3], [4, 4], [3, 5], [5, 4], [4, 3], [3, 6], [4, 5], [5, 3], [3, 4]]
 coordenadasB = [[-1, -4], [-4, -1], [-3, -4], [-4, -5], [-5, -4], [-3, -1], [-4, -6], [-5, -5], [-6, -1], [-4, -3]]
 clasesstr = ["A", "B"]
@@ -15,7 +15,7 @@ for obj1 in objs:
     x.matxy()
     x.KNNR(7)
 
-# %% 
+
 all_coords = coordenadasA + coordenadasB
 xA, yA = zip(*coordenadasA)
 xB, yB = zip(*coordenadasB)
