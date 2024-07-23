@@ -1,24 +1,38 @@
-import numpy as np
+from math import sqrt
 from collections import Counter
+import matplotlib.pyplot as plt
 
 class KNN:
-    def __init__(self, k=3):
+    def __init__(self,a,b,c):
+        self.a = a
+        self.b = b
+        self.c = c
+        self.abres = []
+        self.ares = []
+        self.bres = []
+        self.clases = []
+
+    def matxy(self):
+        for xe in self.a:
+            p = (self.c[0] - xe[0])**2
+            r = (self.c[1] - xe[1])**2
+            o = sqrt(p + r)
+            self.ares.append([o,"A"])
+        for re in self.b:
+            p = (self.c[0] - re[0])**2
+            r = (self.c[1] - re[1])**2
+            o = sqrt(p + r)
+            self.bres.append([o,"B"])
+            self.abres = self.bres + self.ares
+            self.abres.sort()
+    def KNNR(self, k):
         self.k = k
-    def aprendizaje(self, X, C):
-        self.X=X #Matriz de vectores
-        self.c=C #Clases de los vectores
-        self.nmuestras = X.shape[1]#Cantidad de muestras
-        print(X.shape[1])
-    def clasification(self, Y):
-        clases=[]
-        for i in range(Y.shape[1]):
-            distancias=np.empty(self.nmuestras)
-            for n in range(self.nmuestras):
-                distancias[n]=Euclidiana(self.X[:,n],Y[:,i])
-            kdistancias = np.argsort(distancias)
-            ketiqueta=self.c[kdistancias[:self.k]]
-            c = Counter(ketiqueta).most_common(1)
-            clases.append(c[0][0])
-        return clases
-def Euclidiana(x,y):
-    return np.sqrt(np.sum((x-y)**2))
+        a2 = 0
+        b2 = 0
+        for i in range(0,self.k):
+            self.clases.append(self.abres[i][1])
+        contador = Counter(self.clases)
+        r = contador.most_common(1)[0]
+        #print(self.abres[i][0])
+        #print(f"El dato pertenece al grupo "+r[0])
+        plt.annotate(f'Predicción: {r[0]}', (self.c[0], self.c[1]), textcoords="offset points", xytext=(0,-15), ha='center', color='green')
